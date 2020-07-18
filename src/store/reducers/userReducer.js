@@ -1,10 +1,11 @@
-import { token, storage_type } from "../../config";
+import { token } from "../../config";
+import Cookies from "js-cookie";
 const initState = {
   message: null,
   status: null,
   errors: null,
   spinner: false,
-  is_Loggedin: storage_type.getItem(token) ? true : false,
+  is_Loggedin: Cookies.get(token) ? true : false,
 };
 
 const userReducer = (state = initState, { type, payload }) => {

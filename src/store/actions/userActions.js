@@ -1,5 +1,6 @@
 import axios from "axios";
-import { BASE_URL, token, storage_type } from "../../config";
+import { BASE_URL, token } from "../../config";
+import Cookies from "js-cookie";
 export const resetUsersState = (dispatch) => {
   dispatch({ type: "CLEAR_USERS_ERRORS" });
 };
@@ -19,7 +20,7 @@ export const login = async (dispatch, user) => {
       data: user,
     });
 
-    storage_type.setItem(token, result.data.payload.token);
+    Cookies.set(token, result.data.payload.token);
     dispatch({ type: "STOP_SPINNER" });
     dispatch({ type: "SUCCESS_LOGIN", payload: result.data.payload });
 
@@ -46,7 +47,7 @@ export const register = async (dispatch, newUser) => {
     });
     // console.log(result);\
 
-    storage_type.setItem(token, result.data.payload.token);
+    Cookies.set(token, result.data.payload.token);
     dispatch({ type: "STOP_SPINNER" });
 
     dispatch({ type: "SUCCESS_LOGIN", payload: result.data.payload });
@@ -59,7 +60,7 @@ export const register = async (dispatch, newUser) => {
 };
 
 export const logOut = async (dispatch) => {
-  storage_type.removeItem(token);
+  Cookies.remove(token);
   dispatch({ type: "LOGOUT_USER" });
 };
 
