@@ -33,6 +33,11 @@ const Navbar = () => {
   const userLink = (
     <React.Fragment>
       <li className="nav-item">
+        <Link to="/todos" className="nav-link">
+          My todos
+        </Link>
+      </li>
+      <li className="nav-item">
         <Link to="/profile" className="nav-link">
           Profile
         </Link>

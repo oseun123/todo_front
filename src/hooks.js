@@ -1,12 +1,27 @@
 import { useState } from "react";
-export const useForm = (callback, initState = {}, validate) => {
+export const useForm = (callback, initState = {}, validate, params = {}) => {
   const [values, setValues] = useState(initState);
   const [errors, setErrors] = useState({});
+
+  if (Object.keys(params).length !== 0 && params.clear_err) {
+    if (Object.keys(errors).length !== 0) {
+      setErrors({});
+    }
+  }
+  if (Object.keys(params).length !== 0 && params.clear_val) {
+    if (Object.keys(values).length !== 0 && values[params.clear_val] !== "") {
+      setValues({ ...values, [params.clear_val]: "" });
+    }
+  }
+
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
+    // setErrors(validate(values));
   };
   const handleSubmit = (e) => {
-    e.preventDefault();
+    if (e) {
+      e.preventDefault();
+    }
     if (Object.keys(validate(values)).length === 0) {
       callback();
       // setValues(initState);
@@ -15,6 +30,11 @@ export const useForm = (callback, initState = {}, validate) => {
       setErrors(validate(values));
     }
   };
+
+  // if (params.hasOwnProperty("set_title")) {
+  //   // alert("here");
+  //   setValues({ ...values, title: "" });
+  // }
 
   return { handleChange, handleSubmit, errors, values };
 };

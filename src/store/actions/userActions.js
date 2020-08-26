@@ -22,7 +22,7 @@ export const login = async (dispatch, user) => {
 
     Cookies.set(token, result.data.payload.token);
     dispatch({ type: "STOP_SPINNER" });
-    dispatch({ type: "SUCCESS_LOGIN", payload: result.data.payload });
+    dispatch({ type: "SUCCESS_LOGIN", payload: result.data });
 
     return result;
   } catch (error) {
@@ -50,8 +50,8 @@ export const register = async (dispatch, newUser) => {
     Cookies.set(token, result.data.payload.token);
     dispatch({ type: "STOP_SPINNER" });
 
-    dispatch({ type: "SUCCESS_LOGIN", payload: result.data.payload });
-    // return result;
+    dispatch({ type: "SUCCESS_LOGIN", payload: result.data });
+    return result;
   } catch (error) {
     dispatch({ type: "STOP_SPINNER" });
     const resMessage = error.response.data;

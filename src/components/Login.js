@@ -33,7 +33,7 @@ const Login = () => {
   // eslint-disable-next-line
   useEffect(() => {
     if (is_Loggedin) {
-      history.push("/profile");
+      history.push("/todos");
     }
     return () => {
       resetUsersState(dispatch);

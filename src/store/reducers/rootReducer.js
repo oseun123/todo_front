@@ -1,8 +1,10 @@
 import userReducer from "./userReducer";
+import todoReducer from "./todoReducer";
 import { combineReducers, createStore } from "redux";
 
 const rootReducer = combineReducers({
   user: userReducer,
+  todo: todoReducer,
 });
 
 const store = createStore(

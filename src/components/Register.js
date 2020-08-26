@@ -21,7 +21,9 @@ const Register = () => {
   // validations is in useValidateForm which can be replace with any custom validation
   // callback
   const registerUserFromForm = () => {
-    register(dispatch, values);
+    register(dispatch, values).then((res) =>
+      res.data.status === "success" ? history.push("/todos") : null
+    );
   };
 
   const { values, errors, handleChange, handleSubmit } = useForm(
@@ -34,7 +36,7 @@ const Register = () => {
   //eslint - disable - next - line;
   useEffect(() => {
     if (is_Loggedin) {
-      history.push("/profile");
+      history.push("/todos");
     }
     return () => {
       resetUsersState(dispatch);
